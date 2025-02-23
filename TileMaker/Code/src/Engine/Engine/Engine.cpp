@@ -16,5 +16,6 @@ namespace TileMaker
     {
         std::cout << "Engite is runing\n";
         Tools::Test();
+        while (true);
     }
 }

@@ -33,7 +33,7 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
         "Code/src/Engine/**.cpp",
         "Code/src/Engine/**.h",
         "Code/src/Engine/**.hpp"
-    } -- 源代码，匹配src/MyLinkLib下的所有.c和.h文件
+    } -- 源代码，匹配Code/src/Engine/下的所有.c和.h文件
 
     defines {
         "BUILDING_DLL"
@@ -42,34 +42,10 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
     targetdir ("bin/" .. outputdir .. "/%{prj.name}") -- 输出目录，如exe文件，非简单字符串，所以必须有括号。
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}") -- 中间目录，如obj文件
 
-    filter "configurations:Debug" -- Debug配置
-        defines { "DEBUG" } -- 宏定义
-        symbols "On" -- 生成调试信息
-
-        libdirs { 
-            --"third/SFML/build/lib/Debug" 
+    libdirs { "bin/" .. outputdir .. "/Tools"
         } -- 链接的库目录，这里链接了SFML库
-
-        links { 
-            "Tools"
-            --"sfml-audio-d", 
-            --"sfml-graphics-d",
-            --"sfml-network-d",
-            --"sfml-system-d",
-            --"sfml-window-d" 
-        } -- 链接的库，这里链接了SFML库
-        
-        libdirs { "bin/" .. outputdir .. "/Tools"
-        } -- 链接的库目录，这里链接了SFML库
-
-        links {
-            "Tools"
-            --"sfml-audio", 
-            --"sfml-graphics",
-            --"sfml-network",
-            --"sfml-system",
-            --"sfml-window" 
-        } -- 链接的库，这里链接了SFML库
+    
+    links { "Tools" }
 
     postbuildcommands { -- 构建后执行的命令，暂时没用
 
@@ -100,29 +76,34 @@ project ("Tools")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}") 
 
 
-project ("TilesMakerApp") -- 项目名，vs上解决方案内项目名称
-    location "Code/App/" -- 项目所在目录
-    kind "ConsoleApp"  -- 项目类型，控制台应用
-    language "C++"   -- 语言标准
-    cppdialect "C++17" -- C++标准
+project ("TilesMakerApp") 
+    location "Code/App/"    
+    kind "ConsoleApp"       
+    language "C++"          
+    cppdialect "C++17"      
 
     files { 
         "Code/App/**.cpp",
         "Code/App/**.h",
         "Code/App/**.hpp"
-    } -- 源代码，匹配src/Application下的所有.cpp和.h文件
+    }
 
     includedirs {
         "Code/src/Engine/",
-    } -- #include搜索的路径
+    }
 
-    libdirs { "bin/" .. outputdir .. "/Engine" } -- 链接的库目录，这里链接了MyLinkLib项目生成的静态库
+    libdirs { 
+        "bin/" .. outputdir .. "/Engine",
+        "bin/" .. outputdir .. "/Tools"
+        } 
 
-    links { "Engine" } -- 链接的库，这里链接了Engine项目生成的静态库
+    links { 
+        "Engine",
+        "Tools"
+     } -- 链接的库，注意g++链接库不能嵌套
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}") -- 输出目录，如exe文件
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}") -- 中间目录，如obj文件
-
-    postbuildcommands { -- 构建后执行的命令，
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}") 
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}") 
+    postbuildcommands {
     --"{COPY} ../third/SFML/build/bin/%{cfg.buildcfg}/*.dll ../bin/" .. outputdir .. "/%{prj.name}"
     }
