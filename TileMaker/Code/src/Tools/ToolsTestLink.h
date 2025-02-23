@@ -1,11 +1,11 @@
 #pragma once
-__declspec(dllexport) class ToolsTestLink
+
+namespace TileMaker
 {
-public:
-    ToolsTestLink();
-
-    ~ToolsTestLink();
-
-    void Test();
-};
+    class Tools
+    {
+    public:
+        static void Test();
+    };
+}
 

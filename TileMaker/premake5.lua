@@ -30,11 +30,15 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
      }-- #include搜索的路径，将第三方库加上
 
     files { 
-        "Code/src/Engine/*.cpp",
-        "Code/src/Engine/*.h",
-        "Code/src/Engine/*.hpp"
+        "Code/src/Engine/**.cpp",
+        "Code/src/Engine/**.h",
+        "Code/src/Engine/**.hpp"
     } -- 源代码，匹配src/MyLinkLib下的所有.c和.h文件
 
+    defines {
+        "BUILDING_DLL"
+    }
+    
     targetdir ("bin/" .. outputdir .. "/%{prj.name}") -- 输出目录，如exe文件，非简单字符串，所以必须有括号。
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}") -- 中间目录，如obj文件
 
@@ -79,15 +83,19 @@ project ("Tools")
     cppdialect "C++17"
 
     files { 
-        "Code/src/Tools/*.cpp",
-        "Code/src/Tools/*.h",
-        "Code/src/Tools/*.hpp"
+        "Code/src/Tools/**.cpp",
+        "Code/src/Tools/**.h",
+        "Code/src/Tools/**.hpp"
     }
 
     includedirs {
     --   "src/Engine",
     }
 
+    defines {
+        "BUILDING_DLL"
+    }
+    
     targetdir ("bin/" .. outputdir .. "/%{prj.name}") 
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}") 
 
@@ -99,9 +107,9 @@ project ("TilesMakerApp") -- 项目名，vs上解决方案内项目名称
     cppdialect "C++17" -- C++标准
 
     files { 
-        "Code/App/*.cpp",
-        "Code/App/*.h",
-        "Code/App/*.hpp"
+        "Code/App/**.cpp",
+        "Code/App/**.h",
+        "Code/App/**.hpp"
     } -- 源代码，匹配src/Application下的所有.cpp和.h文件
 
     includedirs {

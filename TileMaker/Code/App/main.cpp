@@ -1,8 +1,8 @@
-#include "Test/TestLink.h"
-
+#include "Engine/Engine.h"
 int main()
 {
-    TestLink test;
-    test.Test();
+    TileMaker::Engine test;
+
+    test.Run();
     return 0;
 }

@@ -1,15 +1,11 @@
 #include <iostream>
 #include "ToolsTestLink.h"
 
-ToolsTestLink::ToolsTestLink()
+namespace TileMaker
 {
-}
+    void Tools::Test()
+    {
+        std::cout << "Tools::Test() is runing" << std::endl;
+    }
 
-ToolsTestLink::~ToolsTestLink()
-{
-}
-
-void ToolsTestLink::Test()
-{
-    std::cout << "Tools Link successful\n";
 }
