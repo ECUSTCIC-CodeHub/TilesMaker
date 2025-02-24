@@ -1,8 +1,10 @@
-#include "Engine/Engine.h"
+#include "Core/Engine.h"
+
 int main()
 {
-    TileMaker::Engine test;
+    
+    TileMaker::Engine engine;
+    engine.Run();
 
-    test.Run();
     return 0;
 }

@@ -6,6 +6,7 @@ namespace TileMaker
 {
     Engine::Engine()
     {
+
     }
 
     Engine::~Engine()
@@ -14,8 +15,7 @@ namespace TileMaker
 
     void Engine::Run()
     {
-        std::cout << "Engite is runing\n";
-        Tools::Test();
-        while (true);
+        // init
+
     }
 }
