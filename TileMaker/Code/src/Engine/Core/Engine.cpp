@@ -1,12 +1,13 @@
 #include <iostream>
+#include <SFML/Window.hpp>
 #include "Engine.h"
-#include "ToolsTestLink.h"
+
 
 namespace TileMaker
 {
     Engine::Engine()
     {
-
+        sf::Window window(sf::VideoMode({ 800, 600 }), "TileMaker");
     }
 
     Engine::~Engine()
