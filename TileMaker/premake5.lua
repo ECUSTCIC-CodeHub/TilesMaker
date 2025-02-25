@@ -26,7 +26,7 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
 
     includedirs { 
         "Code/src/Tools",
-        --"third/SFML/include",
+        "ThirdParty/SFML/SFML-3.0.0/include",
      }-- #include搜索的路径，将第三方库加上
 
     files { 
@@ -46,6 +46,32 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
         } -- 链接的库目录，这里链接了SFML库
     
     links { "Tools" }
+
+    filter "configurations:Debug" -- Debug配置
+        libdirs{
+            "ThirdParty/SFML/SFML-3.0.0/bin/Debug",
+        }
+        links { 
+            "sfml-graphics-d",
+            "sfml-window-d",
+            "sfml-system-d",
+            "sfml-audio-d",
+            "sfml-network-d",
+            "sfml-main-d"
+        }
+
+    filter "configurations:Release" -- Release配置
+        libdirs{
+            "ThirdParty/SFML/SFML-3.0.0/bin/Release",
+        }
+        links { 
+            "sfml-graphics",
+            "sfml-window",
+            "sfml-system",
+            "sfml-audio",
+            "sfml-network",
+            "sfml-main"
+        }
 
     postbuildcommands { -- 构建后执行的命令，暂时没用
 

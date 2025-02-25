@@ -5,3 +5,5 @@ TileMaker/.vs/
 TileMaker/bin/
 TileMaker/bin-int/
 *.user
+*.filters
+TileMaker/ThirdParty/SFML/SFML-3.0.0/
