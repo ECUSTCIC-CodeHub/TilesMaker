@@ -7,3 +7,4 @@ TileMaker/bin-int/
 *.user
 *.filters
 TileMaker/ThirdParty/SFML/SFML-3.0.0/
+TileMaker/Code/App/bin/

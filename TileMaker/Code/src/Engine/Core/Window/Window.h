@@ -26,15 +26,17 @@ namespace TileMaker
     class Window
     {
     public:
-        Window();
+        Window() {};
 
         virtual ~Window() = default;
 
         virtual bool Init(const WindosSettings& windowsSettings = WindosSettings()) = 0;
         virtual void ProcessEvents() = 0;
-        virtual void OnUpdate();
+        virtual void OnUpdate() {};
         
-        virtual void GetWindowPointer() const = 0;
+        virtual void* GetWindowPointer() const = 0;
+        
+        virtual bool isOpen() = 0;
         virtual bool isFocused() = 0;
 
         virtual void SetEventCallback(const EventCallback& callback) = 0;

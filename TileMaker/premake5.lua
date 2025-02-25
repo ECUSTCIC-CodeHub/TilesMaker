@@ -48,29 +48,46 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
     links { "Tools" }
 
     filter "configurations:Debug" -- Debug配置
+        debugLibdir = {
+            "ThirdParty/SFML/SFML-3.0.0/bin/lib/Debug",
+        }
+        debugLinks = { 
+            "sfml-graphics-s-d",
+            "sfml-window-s-d",
+            "sfml-system-s-d",
+            "sfml-audio-s-d",
+            "sfml-network-s-d",
+            "opengl32.lib",
+            "winmm.lib",
+            "gdi32.lib"
+        }
+
         libdirs{
-            "ThirdParty/SFML/SFML-3.0.0/bin/Debug",
+            debugLibdir,
         }
         links { 
-            "sfml-graphics-d",
-            "sfml-window-d",
-            "sfml-system-d",
-            "sfml-audio-d",
-            "sfml-network-d",
-            "sfml-main-d"
+            debugLinks
         }
 
     filter "configurations:Release" -- Release配置
+        releaseLibdir = {
+            "ThirdParty/SFML/SFML-3.0.0/bin/lib/Release",
+        }
+        releaseLinks = { 
+            "sfml-graphics-s",
+            "sfml-window-s",
+            "sfml-system-s",
+            "sfml-audio-s",
+            "sfml-network-s",
+            "opengl32.lib",
+            "winmm.lib",
+            "gdi32.lib"
+        }
         libdirs{
-            "ThirdParty/SFML/SFML-3.0.0/bin/Release",
+            releaseLibdir
         }
         links { 
-            "sfml-graphics",
-            "sfml-window",
-            "sfml-system",
-            "sfml-audio",
-            "sfml-network",
-            "sfml-main"
+            releaseLinks
         }
 
     postbuildcommands { -- 构建后执行的命令，暂时没用
@@ -128,6 +145,22 @@ project ("TilesMakerApp")
         "Tools"
      } -- 链接的库，注意g++链接库不能嵌套
 
+    filter "configurations:Debug" 
+        libdirs{
+            debugLibdir,
+        }
+        links { 
+            debugLinks
+        }
+
+    filter "configurations:Release"
+        libdirs{
+            releaseLibdir
+        }
+        links { 
+            releaseLinks
+        }
+    
     targetdir ("bin/" .. outputdir .. "/%{prj.name}") 
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}") 
     postbuildcommands {

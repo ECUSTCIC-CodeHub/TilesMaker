@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Window/Window.h"
+
 namespace TileMaker
 {
     class Engine
@@ -12,6 +14,6 @@ namespace TileMaker
         void Run();
 
     private:
-
+        Window* window;
     };
 }

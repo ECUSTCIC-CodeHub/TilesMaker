@@ -1,13 +1,14 @@
-#include <iostream>
-#include <SFML/Window.hpp>
 #include "Engine.h"
+
+#include <iostream>
+#include "Window/SFMLWindow.h"
 
 
 namespace TileMaker
 {
     Engine::Engine()
     {
-        sf::Window window(sf::VideoMode({ 800, 600 }), "TileMaker");
+        window = new SFMLWindow();
     }
 
     Engine::~Engine()
@@ -16,7 +17,16 @@ namespace TileMaker
 
     void Engine::Run()
     {
-        // init
+        while (window->isOpen())
+        {
+            while (const auto event = static_cast<sf::Window*>(window->GetWindowPointer())->pollEvent())
+            {
+                if (event->is<sf::Event::Closed>())
+                {
+                    static_cast<sf::Window*>(window->GetWindowPointer())->close();
+                }
+            }
 
+        }
     }
 }
