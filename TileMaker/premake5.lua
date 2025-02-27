@@ -18,6 +18,8 @@ workspace ("TilesMaker") -- 工作区名，VS上对应sln文件名
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}" -- 变量
 
 
+include("ThirdParty/tmxlite/") -- 引入tmxlite的premake5.lua文件，会直接调用里面的project函数
+
 project ("Engine") -- 项目名，vs上解决方案内项目名称
     location "Code/src/Engine/" -- 项目所在目录，相对于premake5.lua开始，vs的.vcxproj项目文件会放在这
     kind "StaticLib"  -- 项目类型，静态链接库

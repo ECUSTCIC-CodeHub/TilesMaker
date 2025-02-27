@@ -8,3 +8,4 @@ TileMaker/bin-int/
 *.filters
 TileMaker/ThirdParty/SFML/SFML-3.0.0/
 TileMaker/Code/App/bin/
+TileMaker/ThirdParty/tmxlite/bin/
