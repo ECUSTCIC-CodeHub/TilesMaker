@@ -110,7 +110,7 @@ project ("Tools")
     }
 
     includedirs {
-    --   "src/Engine",
+       "ThirdParty/tmxlite/include",
     }
 
     defines {

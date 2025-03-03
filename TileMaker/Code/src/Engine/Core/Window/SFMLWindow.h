@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Window.h"
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace TileMaker
 {
@@ -24,7 +24,7 @@ namespace TileMaker
         bool isOpen() override;
 
     private:
-        sf::Window* m_window;
+        sf::RenderWindow * m_window;
     };
 }
 
