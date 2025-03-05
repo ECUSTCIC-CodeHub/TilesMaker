@@ -29,6 +29,7 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
     includedirs { 
         "Code/src/Tools",
         "ThirdParty/SFML/SFML-3.0.0/include",
+        "ThirdParty/tmxlite/include",
      }-- #include搜索的路径，将第三方库加上
 
     files { 

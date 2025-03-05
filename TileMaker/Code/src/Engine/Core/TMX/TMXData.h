@@ -1,10 +1,12 @@
 #pragma once
 
 #include <tmxlite/Map.hpp>
+#include <vector>
 
 
 namespace TileMaker
 {
+    using MapLayer = std::vector<tmx::Layer::Ptr>;
     class TMXData
     {
     public:
@@ -14,7 +16,7 @@ namespace TileMaker
 
 
     private:
-
+        std::vector<MapLayer> m_layers;
     };
-
+    
 }
