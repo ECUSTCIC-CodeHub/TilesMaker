@@ -1,6 +1,6 @@
 #include "SFMLWindow.h"
 
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace TileMaker
 {
@@ -17,7 +17,7 @@ namespace TileMaker
     bool SFMLWindow::Init(const WindosSettings& windowsSettings)
     {
         WindosSettings settings;
-        m_window = new sf::Window(sf::VideoMode({ settings.width,settings.height }), settings.title);
+        m_window = new sf::RenderWindow(sf::VideoMode({ settings.width,settings.height }), settings.title);
         return true;
     }
 

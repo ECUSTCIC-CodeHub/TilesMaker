@@ -29,6 +29,7 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
     includedirs { 
         "Code/src/Tools",
         "ThirdParty/SFML/SFML-3.0.0/include",
+        "ThirdParty/tmxlite/include",
      }-- #include搜索的路径，将第三方库加上
 
     files { 
@@ -38,16 +39,20 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
     } -- 源代码，匹配Code/src/Engine/下的所有.c和.h文件
 
     defines {
-        "BUILDING_DLL"
+        "BUILDING_DLL",
+        "SFML_STATIC"
     }
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}") -- 输出目录，如exe文件，非简单字符串，所以必须有括号。
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}") -- 中间目录，如obj文件
 
-    libdirs { "bin/" .. outputdir .. "/Tools"
+    libdirs { "bin/" .. outputdir .. "/Tools",
+              "bin/third-" .. outputdir .. "/tmxlite"
         } -- 链接的库目录，这里链接了SFML库
     
-    links { "Tools" }
+    links { "Tools",
+            "tmxlite"
+    } 
 
     filter "configurations:Debug" -- Debug配置
         debugLibdir = {
