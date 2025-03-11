@@ -19,6 +19,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}" -- 变量
 
 
 include("ThirdParty/tmxlite/") -- 引入tmxlite的premake5.lua文件，会直接调用里面的project函数
+include("ThirdParty/imgui")
+
 
 project ("Engine") -- 项目名，vs上解决方案内项目名称
     location "Code/src/Engine/" -- 项目所在目录，相对于premake5.lua开始，vs的.vcxproj项目文件会放在这
@@ -30,6 +32,7 @@ project ("Engine") -- 项目名，vs上解决方案内项目名称
         "Code/src/Tools",
         "ThirdParty/SFML/SFML-3.0.0/include",
         "ThirdParty/tmxlite/include",
+        "ThirdParty/imgui",
      }-- #include搜索的路径，将第三方库加上
 
     files { 
