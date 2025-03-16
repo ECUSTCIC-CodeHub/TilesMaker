@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Window/Window.h"
+#include "Layer/Layer.h"
+#include <memory>
 
 namespace TileMaker
 {
@@ -13,7 +15,13 @@ namespace TileMaker
 
         void Run();
 
+        Window* GetWindow();
+
     private:
-        Window* window;
+        std::unique_ptr<Window> window;
+
+        LayerStack layerStack;
     };
+
+    static Engine* s_Engine = new Engine(); // 全局变量实现单例模式
 }

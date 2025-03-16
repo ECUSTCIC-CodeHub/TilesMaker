@@ -5,12 +5,12 @@
 
 namespace TileMaker
 {
-
-
     class Layer
     {
     public:
-        Layer();
+        Layer(const std::string Name = "BaseLayer")
+            :m_Name(Name)
+        {}
 
         // 析构定义为虚函数，避免内存泄漏
         virtual ~Layer();

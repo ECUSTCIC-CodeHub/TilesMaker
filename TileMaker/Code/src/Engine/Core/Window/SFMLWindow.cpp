@@ -18,10 +18,14 @@ namespace TileMaker
     {
         WindosSettings settings;
         m_window = new sf::RenderWindow(sf::VideoMode({ settings.width,settings.height }), settings.title);
+
+        m_window->setFramerateLimit(60);
+
         return true;
     }
 
-    void* SFMLWindow::GetWindowPointer() const
+
+    void* SFMLWindow::GetNativeWindow() const
     {
         return m_window;
     }

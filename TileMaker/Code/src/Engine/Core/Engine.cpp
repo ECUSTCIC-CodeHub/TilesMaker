@@ -20,7 +20,7 @@ namespace TileMaker
 {
     Engine::Engine()
     {
-        window = new SFMLWindow();
+        window = std::make_unique<SFMLWindow>();
     }
 
     Engine::~Engine()
@@ -39,22 +39,13 @@ namespace TileMaker
         MapLayer layerThree(map, 2);
         MapLayer layerFour(map, 3);
 
-        static_cast<sf::RenderWindow*>(window->GetWindowPointer())->setFramerateLimit(60);
-        ImGui::SFML::Init(*static_cast<sf::RenderWindow*>(window->GetWindowPointer()));
+        ImGui::SFML::Init(*static_cast<sf::RenderWindow*>(window->GetNativeWindow()));
         sf::CircleShape shape(100.f);
         shape.setFillColor(sf::Color::Green);
         sf::Clock deltaClock;
 
         while (window->isOpen())
         {
-            while (const auto event = static_cast<sf::Window*>(window->GetWindowPointer())->pollEvent())
-            {
-                ImGui::SFML::ProcessEvent(*static_cast<sf::RenderWindow*>(window->GetWindowPointer()), *event);
-                if (event->is<sf::Event::Closed>())
-                {
-                    static_cast<sf::Window*>(window->GetWindowPointer())->close();
-                }
-            }
             sf::Time duration = globalClock.restart();
             layerZero.update(duration);
 
@@ -83,5 +74,10 @@ namespace TileMaker
 
             static_cast<sf::RenderWindow*>(window->GetWindowPointer())->display();
         }
+    }
+
+    Window* Engine::GetWindow()
+    {
+        return window.get();
     }
 }

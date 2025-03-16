@@ -15,13 +15,11 @@ namespace TileMaker
         ~SFMLWindow() override;
 
         bool Init(const WindosSettings& windowsSettings = WindosSettings()) override;
-        void ProcessEvents() override {};
-        void OnUpdate() override {};
-        void* GetWindowPointer() const override;
+        void* GetNativeWindow() const override;
         bool isFocused() override { return false; };
         void SetEventCallback(const EventCallback& callback) override {};
 
-        bool isOpen() override;
+        bool isOpen() override { return true; };
 
     private:
         sf::RenderWindow * m_window;

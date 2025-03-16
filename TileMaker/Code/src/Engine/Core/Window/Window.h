@@ -31,11 +31,10 @@ namespace TileMaker
         virtual ~Window() = default;
 
         virtual bool Init(const WindosSettings& windowsSettings = WindosSettings()) = 0;
-        virtual void ProcessEvents() = 0;
-        virtual void OnUpdate() {};
         
-        virtual void* GetWindowPointer() const = 0;
-        
+        virtual void* GetNativeWindow() const = 0;
+        //virtual void* GetNativeWindow() const;
+
         virtual bool isOpen() = 0;
         virtual bool isFocused() = 0;
 
