@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+#include <SFML/System/Time.hpp>
+
 namespace TileMaker
 {
     class Layer
@@ -19,9 +21,11 @@ namespace TileMaker
         virtual void OnAttach();
         virtual void OnDetach();
 
-        virtual void OnUpdate();
+        virtual void OnUpdate(const sf::Time& time);
 
-        virtual void OnEvent();
+        virtual void OnEvent(const sf::Event& evnet);
+
+        virtual void OnRender();
 
         const std::string& GetName() const;
 

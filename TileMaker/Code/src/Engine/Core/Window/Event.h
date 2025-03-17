@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Window/Event.hpp>
+
 namespace TileMaker
 {
     class Event

@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 #include <iostream>
-#include "Window/SFMLWindow.h"
+#include "Window/Window.h"
 
 #include <tmxlite/Map.hpp>
 #include "TMX/TMXLayer.h"
@@ -20,7 +20,7 @@ namespace TileMaker
 {
     Engine::Engine()
     {
-        window = std::make_unique<SFMLWindow>();
+        window = std::make_unique<Window>();
     }
 
     Engine::~Engine()
@@ -30,8 +30,6 @@ namespace TileMaker
     void Engine::Run()
     {
         tmx::Map map;
-        sf::Clock globalClock;
-        sf::Clock wiggleClock;
         map.load("./Resource/map/rpg/island.tmx"); // 因为路径问题，直接运行exe
 
         MapLayer layerZero(map, 0);
@@ -44,38 +42,75 @@ namespace TileMaker
         shape.setFillColor(sf::Color::Green);
         sf::Clock deltaClock;
 
-        while (window->isOpen())
+        while (window->isOpen)
         {
-            sf::Time duration = globalClock.restart();
-            layerZero.update(duration);
+            sf::Time duration = m_clock.restart();
 
-            sf::Vector2f newOffset = sf::Vector2f(0.f, 0.f);
-            if (true)
+            if (window->isFocused)
             {
-                newOffset = sf::Vector2f(std::cos(wiggleClock.getElapsedTime().asSeconds()) * 100.f, 0.f);
+                OnEvent();
+
+                for (auto& layer : layerStack)
+                {
+                    layer->OnUpdate(duration);
+                }
+
+                for (auto& layer : layerStack)
+                {
+                    layer->OnRender();
+                }
             }
-            //layerZero.setOffset(newOffset);
 
-            ImGui::SFML::Update(*static_cast<sf::RenderWindow*>(window->GetWindowPointer()), deltaClock.restart());
-            ImGui::ShowDemoWindow();
+            //window->GetNativeWindow()->clear(sf::Color::Black);
 
-            ImGui::Begin("Hello, world!");
-            ImGui::Button("Look at this pretty button");
-            ImGui::End();
-
-            static_cast<sf::RenderWindow*>(window->GetWindowPointer())->clear(sf::Color::Black);
-
-            static_cast<sf::RenderWindow*>(window->GetWindowPointer())->draw(layerZero);
-            static_cast<sf::RenderWindow*>(window->GetWindowPointer())->draw(layerOne);
-            static_cast<sf::RenderWindow*>(window->GetWindowPointer())->draw(layerThree);
-            static_cast<sf::RenderWindow*>(window->GetWindowPointer())->draw(layerFour);
-
-            ImGui::SFML::Render(*static_cast<sf::RenderWindow*>(window->GetWindowPointer()));
-
-            static_cast<sf::RenderWindow*>(window->GetWindowPointer())->display();
+            window->GetNativeWindow()->display();
         }
     }
 
+    void Engine::OnEvent()
+    {
+        while (const auto& event = GetWindow()->GetNativeWindow()->pollEvent())
+        {
+
+            if (event->is<sf::Event::Closed>())
+            {
+                GetWindow()->Close();
+                break;
+            }
+
+            if (const auto* resize = event->getIf<sf::Event::Resized>())
+            {
+                GetWindow()->SetView(sf::View(sf::FloatRect({ 0, 0 }, { resize->size.x , resize->size.y })));
+            }
+            else
+            {
+                for (auto& layer : layerStack)
+                {
+                    layer->OnEvent(event.value());
+                }
+            }
+        }
+
+
+        GetWindow()->GetNativeWindow()->handleEvents(
+            [&](const sf::Event::Closed&)
+            {
+                GetWindow()->Close();
+            },
+            [&](const sf::Event::Resized& event)
+            {
+                GetWindow()->SetView(sf::View(sf::FloatRect({ 0, 0 }, { event.size.x, event.size.y })));
+            },
+            [&](const auto& event)
+            {
+                std::optional<sf::Event> optEvent = event;
+
+                for (auto& layer : layerStack)
+                {
+                    layer->OnEvent(optEvent);
+                }
+            });
+    }
     Window* Engine::GetWindow()
     {
         return window.get();

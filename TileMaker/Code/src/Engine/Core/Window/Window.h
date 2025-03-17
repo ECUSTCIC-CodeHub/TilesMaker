@@ -2,6 +2,9 @@
 
 #include <functional>
 #include <string>
+#include <memory>
+
+#include "SFML/Graphics/RenderWindow.hpp"
 
 namespace TileMaker
 {
@@ -26,19 +29,25 @@ namespace TileMaker
     class Window
     {
     public:
-        Window() {};
+        Window(const WindosSettings& windowsSettings = WindosSettings());
 
-        virtual ~Window() = default;
+        ~Window();
 
-        virtual bool Init(const WindosSettings& windowsSettings = WindosSettings()) = 0;
+        bool Init(const WindosSettings& windowsSettings);
         
-        virtual void* GetNativeWindow() const = 0;
-        //virtual void* GetNativeWindow() const;
+        sf::RenderWindow* GetNativeWindow() const;
 
-        virtual bool isOpen() = 0;
-        virtual bool isFocused() = 0;
 
-        virtual void SetEventCallback(const EventCallback& callback) = 0;
+        void Close();
+        void SetView(const sf::View& view);
 
+    public:
+        bool isOpen = false;
+        bool isFocused = false;
+
+    private:
+        std::unique_ptr<sf::RenderWindow>  m_window;
+
+        
     };
 }

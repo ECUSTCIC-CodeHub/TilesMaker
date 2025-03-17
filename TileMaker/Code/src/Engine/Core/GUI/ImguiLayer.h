@@ -17,8 +17,10 @@ namespace TileMaker
 
         void OnDetach() override;
 
-        void OnUpdate() override;
+        void OnUpdate(const sf::Time& time) override;
 
-        void OnEvent() override;
+        void OnEvent(const sf::Event& evnet) override;
+
+        void OnRender() override;
     };
 }

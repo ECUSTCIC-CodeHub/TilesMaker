@@ -1,6 +1,8 @@
 #include "ImguiLayer.h"
 #include "../Engine.h"
 
+
+
 namespace TileMaker
 {
     ImguiLayer::ImguiLayer(const std::string Name)
@@ -14,7 +16,7 @@ namespace TileMaker
 
     void ImguiLayer::OnAttach()
     {
-        ImGui::SFML::Init(*static_cast<sf::RenderWindow*>(s_Engine->GetWindow()->GetNativeWindow()));
+        ImGui::SFML::Init(*s_Engine->GetWindow()->GetNativeWindow());
     }
 
     void ImguiLayer::OnDetach()
@@ -22,13 +24,24 @@ namespace TileMaker
         ImGui::SFML::Shutdown();
     }
 
-    void ImguiLayer::OnUpdate()
+    void ImguiLayer::OnUpdate(const sf::Time& time)
     {
-        ImGui::SFML::Update(*static_cast<sf::RenderWindow*>(s_Engine->GetWindow()->GetNativeWindow()), deltaClock.restart());
+        ImGui::SFML::Update(*s_Engine->GetWindow()->GetNativeWindow(),time);
     }
 
-    void ImguiLayer::OnEvent()
+    void ImguiLayer::OnEvent(const sf::Event& evnet)
     {
+        ImGui::SFML::ProcessEvent(*s_Engine->GetWindow()->GetNativeWindow(), evnet);
+    }
 
+    void ImguiLayer::OnRender()
+    {
+        ImGui::ShowDemoWindow();
+
+        ImGui::Begin("Hello, world!");
+        ImGui::Button("Look at this pretty button");
+        ImGui::End();
+
+        ImGui::SFML::Render(*s_Engine->GetWindow()->GetNativeWindow());
     }
 }
