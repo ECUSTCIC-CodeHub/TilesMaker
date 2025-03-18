@@ -50,7 +50,7 @@ namespace TileMaker
             else
             {
                 //round the chunk size to the nearest tile
-                const auto tileSize = map.getTileSize();
+                const auto& tileSize = map.getTileSize();
                 m_chunkSize.x = std::floor(m_chunkSize.x / tileSize.x) * tileSize.x;
                 m_chunkSize.y = std::floor(m_chunkSize.y / tileSize.y) * tileSize.y;
                 m_mapTileSize.x = map.getTileSize().x;
@@ -192,7 +192,7 @@ namespace TileMaker
                 {
                     if (ts->hasTransparency())
                     {
-                        auto transparency = ts->getTransparencyColour();
+                        auto& transparency = ts->getTransparencyColour();
                         img.createMaskFromColor({ transparency.r, transparency.g, transparency.b, transparency.a });
                     }
                     newTexture->loadFromImage(img);

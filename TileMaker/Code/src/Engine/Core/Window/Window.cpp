@@ -27,9 +27,4 @@ namespace TileMaker
         return m_window.get();
     }
 
-    bool Window::isOpen()
-    {
-        return m_open;
-    }
-
 }

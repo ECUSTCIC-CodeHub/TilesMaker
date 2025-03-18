@@ -41,7 +41,7 @@ namespace TileMaker
             layerOpacity = static_cast<m_uint8>(layer.getOpacity() / 1.f * 255.f);
 
             sf::Color vertColour = sf::Color(200, 200, 200, layerOpacity);
-            auto offset = layer.getOffset();
+            auto& offset = layer.getOffset();
             layerOffset = { static_cast<float>(offset.x), static_cast<float>(offset.y) };
             chunkTileCount = { tileCount.x, tileCount.y };
             mapTileSize = tileSize;

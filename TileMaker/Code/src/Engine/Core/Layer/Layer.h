@@ -4,6 +4,7 @@
 #include <string>
 
 #include <SFML/System/Time.hpp>
+#include <SFML/Window/Event.hpp>
 
 namespace TileMaker
 {

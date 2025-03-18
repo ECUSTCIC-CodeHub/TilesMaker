@@ -37,7 +37,6 @@ namespace TileMaker
         MapLayer layerThree(map, 2);
         MapLayer layerFour(map, 3);
 
-        ImGui::SFML::Init(*static_cast<sf::RenderWindow*>(window->GetNativeWindow()));
         sf::CircleShape shape(100.f);
         shape.setFillColor(sf::Color::Green);
         sf::Clock deltaClock;
@@ -80,7 +79,7 @@ namespace TileMaker
 
             if (const auto* resize = event->getIf<sf::Event::Resized>())
             {
-                GetWindow()->SetView(sf::View(sf::FloatRect({ 0, 0 }, { resize->size.x , resize->size.y })));
+                GetWindow()->SetView(sf::View(sf::FloatRect({ 0.f, 0.f }, { (float)resize->size.x , (float)resize->size.y })));
             }
             else
             {
@@ -90,27 +89,8 @@ namespace TileMaker
                 }
             }
         }
-
-
-        GetWindow()->GetNativeWindow()->handleEvents(
-            [&](const sf::Event::Closed&)
-            {
-                GetWindow()->Close();
-            },
-            [&](const sf::Event::Resized& event)
-            {
-                GetWindow()->SetView(sf::View(sf::FloatRect({ 0, 0 }, { event.size.x, event.size.y })));
-            },
-            [&](const auto& event)
-            {
-                std::optional<sf::Event> optEvent = event;
-
-                for (auto& layer : layerStack)
-                {
-                    layer->OnEvent(optEvent);
-                }
-            });
     }
+
     Window* Engine::GetWindow()
     {
         return window.get();
