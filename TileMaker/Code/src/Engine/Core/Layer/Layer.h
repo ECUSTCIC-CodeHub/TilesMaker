@@ -19,16 +19,16 @@ namespace TileMaker
         virtual ~Layer();
 
         // 提供扩展性的东西，项目除基础组件之外都要继承他
-        virtual void OnAttach();
-        virtual void OnDetach();
+        virtual void OnAttach() {};
+        virtual void OnDetach() {};
 
-        virtual void OnUpdate(const sf::Time& time);
+        virtual void OnUpdate(const sf::Time& time) {};
 
-        virtual void OnEvent(const sf::Event& evnet);
+        virtual void OnEvent(const sf::Event& evnet) {};
 
-        virtual void OnRender();
+        virtual void OnRender() {};
 
-        const std::string& GetName() const;
+        const std::string& GetName() const { return m_Name; };
 
     private:
         std::string m_Name;
@@ -38,7 +38,7 @@ namespace TileMaker
     class LayerStack
     {
     public:
-        LayerStack();
+        LayerStack() = default;
 
         ~LayerStack();
 
@@ -51,12 +51,17 @@ namespace TileMaker
 
         void PopOverlay(Layer* overlay);
 
+        std::string getLayerName(int index);
+
         // 迭代器，支持for(auto layer : layerStack)形式的遍历
         std::vector<Layer*>::iterator begin();
         std::vector<Layer*>::iterator end();
+        std::vector<Layer*>::reverse_iterator rbegin();
+        std::vector<Layer*>::reverse_iterator rend();
 
     private:
         std::vector<Layer*> m_Layers;
+        unsigned int m_LayerInsertIndex = 0;
 
     };
 }

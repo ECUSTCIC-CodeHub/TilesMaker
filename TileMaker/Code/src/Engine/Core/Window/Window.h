@@ -48,6 +48,5 @@ namespace TileMaker
     private:
         std::unique_ptr<sf::RenderWindow>  m_window;
 
-        
     };
 }

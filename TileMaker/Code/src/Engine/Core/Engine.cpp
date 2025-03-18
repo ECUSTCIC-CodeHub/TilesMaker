@@ -1,26 +1,23 @@
 #include "Engine.h"
-
-#include <iostream>
+#include "GUI/ImguiLayer.h"
+#include "TMX/TMXLayer.h"
 #include "Window/Window.h"
 
-#include <tmxlite/Map.hpp>
-#include "TMX/TMXLayer.h"
-
-// ≤‚ ‘
-#include "imgui.h"
-#include "imgui-SFML.h"
+#include <iostream>
 
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include <tmxlite/Map.hpp>
 
 namespace TileMaker
 {
     Engine::Engine()
     {
         window = std::make_unique<Window>();
+        layerStack.PushLayer(std::make_shared<ImguiLayer>());
     }
 
     Engine::~Engine()

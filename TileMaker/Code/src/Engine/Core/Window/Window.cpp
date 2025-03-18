@@ -1,10 +1,12 @@
 #include "Window.h"
 
+
 namespace TileMaker
 {
     Window::Window(const WindosSettings& windowsSettings)
     {
         Init(windowsSettings);
+
     }
 
     Window::~Window()
@@ -27,4 +29,13 @@ namespace TileMaker
         return m_window.get();
     }
 
+    void Window::Close()
+    {
+        m_window->close();
+    }
+
+    void Window::SetView(const sf::View& view)
+    {
+        m_window->setView(view);
+    }
 }
