@@ -6,7 +6,6 @@ namespace TileMaker
     Window::Window(const WindosSettings& windowsSettings)
     {
         Init(windowsSettings);
-
     }
 
     Window::~Window()
@@ -16,9 +15,8 @@ namespace TileMaker
     bool Window::Init(const WindosSettings& windowsSettings)
     {
         m_window = std::make_unique<sf::RenderWindow>(
-            sf::VideoMode({ windowsSettings.width,windowsSettings.height }), 
-            windowsSettings.title);
-
+            sf::VideoMode({ 800,600 }), 
+            "windowsSettings.title");
         m_window->setFramerateLimit(60);
 
         return true;

@@ -42,8 +42,8 @@ namespace TileMaker
         void SetView(const sf::View& view);
 
     public:
-        bool isOpen = false;
-        bool isFocused = false;
+        bool isOpen = true;
+        bool isFocused = true;
 
     private:
         std::unique_ptr<sf::RenderWindow>  m_window;

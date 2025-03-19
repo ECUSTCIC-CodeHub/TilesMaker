@@ -8,6 +8,7 @@
 
 namespace TileMaker
 {
+
     class Layer
     {
     public:
@@ -16,7 +17,7 @@ namespace TileMaker
         {}
 
         // 析构定义为虚函数，避免内存泄漏
-        virtual ~Layer();
+        virtual ~Layer() {};
 
         // 提供扩展性的东西，项目除基础组件之外都要继承他
         virtual void OnAttach() {};

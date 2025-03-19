@@ -16,8 +16,9 @@ namespace TileMaker
 {
     Engine::Engine()
     {
+        s_Engine = this;
         window = std::make_unique<Window>();
-        layerStack.PushLayer(std::make_shared<ImguiLayer>());
+        layerStack.PushLayer(new ImguiLayer());
     }
 
     Engine::~Engine()
