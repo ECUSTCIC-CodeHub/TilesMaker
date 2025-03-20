@@ -52,13 +52,14 @@ namespace TileMaker
                     layer->OnUpdate(duration);
                 }
 
+                window->GetNativeWindow()->clear(sf::Color::Black);
+
                 for (auto& layer : layerStack)
                 {
                     layer->OnRender();
                 }
             }
 
-            //window->GetNativeWindow()->clear(sf::Color::Black);
 
             window->GetNativeWindow()->display();
         }
