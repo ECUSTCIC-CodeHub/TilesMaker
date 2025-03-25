@@ -5,7 +5,7 @@
 
 namespace TileMaker
 {
-    ImguiLayer::ImguiLayer(const std::string Name)
+    ImguiLayer::ImguiLayer(const std::string& Name)
         :Layer(Name)
     {
         ImGui::SFML::Init(*s_Engine->GetWindow()->GetNativeWindow());

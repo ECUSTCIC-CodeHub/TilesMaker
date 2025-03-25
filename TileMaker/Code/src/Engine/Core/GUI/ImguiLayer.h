@@ -9,7 +9,7 @@ namespace TileMaker
     class ImguiLayer :public Layer
     {
     public:
-        ImguiLayer(const std::string Name = "ImguiLayer");
+        ImguiLayer(const std::string& Name = "ImguiLayer");
 
         ~ImguiLayer();
 

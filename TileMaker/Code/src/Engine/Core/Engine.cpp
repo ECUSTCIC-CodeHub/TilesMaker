@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "GUI/ImguiLayer.h"
+#include "TMX/MapLayer.h"
 #include "TMX/TMXLayer.h"
 #include "Window/Window.h"
 
@@ -10,7 +11,6 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include <tmxlite/Map.hpp>
 
 namespace TileMaker
 {
@@ -27,13 +27,10 @@ namespace TileMaker
 
     void Engine::Run()
     {
-        tmx::Map map;
-        map.load("./Resource/map/rpg/island.tmx"); // 因为路径问题，直接运行exe
+        std::filesystem::path p = "C:/Code/ECUSTCIC-CodeHub/TilesMaker/TileMaker/bin/Release-windows-x86_64/TilesMakerApp/Resource/map/rpg/island.tmx";
+        MapLayer map(p);
 
-        MapLayer layerZero(map, 0);
-        MapLayer layerOne(map, 1);
-        MapLayer layerThree(map, 2);
-        MapLayer layerFour(map, 3);
+        layerStack.PushLayer(&map);
 
         sf::CircleShape shape(100.f);
         shape.setFillColor(sf::Color::Green);

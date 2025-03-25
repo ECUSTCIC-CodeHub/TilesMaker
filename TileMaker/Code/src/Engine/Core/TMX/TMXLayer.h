@@ -27,11 +27,11 @@
 namespace TileMaker
 {
 
-    class MapLayer final : public sf::Drawable
+    class TMXLayer final : public sf::Drawable
     {
     public:
 
-        MapLayer(const tmx::Map& map, std::size_t idx)
+        TMXLayer(const tmx::Map& map, std::size_t idx)
         {
             const auto& layers = map.getLayers();
             if (map.getOrientation() != tmx::Orientation::Orthogonal)
@@ -63,9 +63,9 @@ namespace TileMaker
             }
         }
 
-        ~MapLayer() = default;
-        MapLayer(const MapLayer&) = delete;
-        MapLayer& operator = (const MapLayer&) = delete;
+        ~TMXLayer() = default;
+        TMXLayer(const TMXLayer&) = delete;
+        TMXLayer& operator = (const TMXLayer&) = delete;
 
         const sf::FloatRect& getGlobalBounds() const { return m_globalBounds; }
 
